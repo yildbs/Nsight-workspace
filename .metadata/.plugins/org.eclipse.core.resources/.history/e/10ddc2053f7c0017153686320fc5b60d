@@ -1,0 +1,9 @@
+#ifndef MEMORY_HPP
+#define MEMORY_HPP
+
+namespace ycv{
+
+
+
+#endif // MEMORY_HPP
+
