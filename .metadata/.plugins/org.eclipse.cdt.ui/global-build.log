@@ -1,13 +1,8 @@
-07:23:12 **** Incremental Build of configuration Release for project libYCV ****
-make all 
-make: Nothing to be done for 'all'.
-07:23:12 **** Incremental Build of configuration Debug for project libYCV ****
-make all 
-make: Nothing to be done for 'all'.
-07:23:12 **** Incremental Build of configuration Debug for project libLicensePlateRecognizer ****
-make all 
-Building target: libLicensePlateRecognizer.so
-Invoking: NVCC Linker
-/usr/local/cuda-8.0/bin/nvcc --cudart static -L"/home/yildbs/Workspace/Personal/Nsight-Workspace/libYCV/Debug" -shared --relocatable-device-code=false -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60 -link -o  "libLicensePlateRecognizer.so"  ./ylpr/Recognizer.o   -lYCV
-Finished building target: libLicensePlateRecognizer.so
+19:37:47 **** Clean-only build of configuration Debug for project libYCV ****
+make clean 
+rm -rf  ./ycv/imgproc/resize/resize.o  ./ycv/imgproc/hog/GetSupportVector/GetSupportVector160x96.o  ./ycv/imgproc/hog/hog.o  ./ycv/imgproc/resize/resize.d  ./ycv/imgproc/hog/GetSupportVector/GetSupportVector160x96.d  ./ycv/imgproc/hog/hog.d  libYCV.so
+ 
+19:37:48 **** Clean-only build of configuration Debug for project libLicensePlateRecognizer ****
+make clean 
+rm -rf  ./ylpr/Recognizer.o  ./ylpr/Recognizer.d  libLicensePlateRecognizer.so
  

@@ -635,3 +635,21 @@ java.lang.Exception
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1438)
+!SESSION 2017-10-12 19:36:34.626 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_07
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2017-10-12 19:36:36.984
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY com.nvidia.cuda.ide.build 4 0 2017-10-12 19:38:03.252
+!MESSAGE Adding CUDA Toolkit 8.0 (id=com.nvidia.cuda.ide.toolchain.eight_zero.exe.release) to the list of preferred toolchains
+
+!ENTRY org.eclipse.cdt.core 1 0 2017-10-12 19:38:05.986
+!MESSAGE Indexed 'Example-LicensePlateRecognizer' (1 sources, 218 headers) in 25.7 sec: 33,717 declarations; 55,563 references; 0 unresolved inclusions; 0 syntax errors; 19 unresolved names (0.021%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2017-10-12 19:38:18.933
+!MESSAGE Indexed 'Example-BackgroundDifferenceWithHogFeature' (0 sources, 0 headers) in 0.001 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
