@@ -1,8 +1,13 @@
-19:37:47 **** Clean-only build of configuration Debug for project libYCV ****
-make clean 
-rm -rf  ./ycv/imgproc/resize/resize.o  ./ycv/imgproc/hog/GetSupportVector/GetSupportVector160x96.o  ./ycv/imgproc/hog/hog.o  ./ycv/imgproc/resize/resize.d  ./ycv/imgproc/hog/GetSupportVector/GetSupportVector160x96.d  ./ycv/imgproc/hog/hog.d  libYCV.so
+22:20:27 **** Incremental Build of configuration Debug for project Example-BackgroundDifferenceWithHogFeature ****
+make all 
+Building target: Example-BackgroundDifferenceWithHogFeature
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static -L/usr/local/lib -L"/home/yildbs/Workspace/Personal/Nsight-Workspace/libYCV/Debug" --relocatable-device-code=false -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60 -link -o  "Example-BackgroundDifferenceWithHogFeature"  ./main.o   -lopencv_core -lopencv_imgproc -lopencv_imgcodecs -lopencv_highgui -lYCV
+Finished building target: Example-BackgroundDifferenceWithHogFeature
  
-19:37:48 **** Clean-only build of configuration Debug for project libLicensePlateRecognizer ****
-make clean 
-rm -rf  ./ylpr/Recognizer.o  ./ylpr/Recognizer.d  libLicensePlateRecognizer.so
- 
+22:20:34 **** Incremental Build of configuration Debug for project Example-BackgroundDifferenceWithHogFeature ****
+make all 
+make: Nothing to be done for 'all'.
+22:21:29 **** Incremental Build of configuration Debug for project Example-BackgroundDifferenceWithHogFeature ****
+make all 
+make: Nothing to be done for 'all'.

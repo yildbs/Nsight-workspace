@@ -1,0 +1,16 @@
+#include <opencv2/imgproc.hpp>
+#include <opencv2/core.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/objdetect.hpp>
+
+int main()
+{
+	cv::Mat image = cv::imread("/home/yildbs/Data/sample.ppm");
+	cv::imshow("image", image);
+	cv::waitKey(0);
+
+
+
+
+
+}

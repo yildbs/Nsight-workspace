@@ -1,7 +1,6 @@
-19:37:47 **** Clean-only build of configuration Debug for project libYCV ****
-make clean 
-rm -rf  ./ycv/imgproc/resize/resize.o  ./ycv/imgproc/hog/GetSupportVector/GetSupportVector160x96.o  ./ycv/imgproc/hog/hog.o  ./ycv/imgproc/resize/resize.d  ./ycv/imgproc/hog/GetSupportVector/GetSupportVector160x96.d  ./ycv/imgproc/hog/hog.d  libYCV.so
- 
+22:18:59 **** Incremental Build of configuration Debug for project libYCV ****
+make all 
+make: Nothing to be done for 'all'.
 
-19:37:48 Build Finished (took 89ms)
+22:18:59 Build Finished (took 71ms)
 

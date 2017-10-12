@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="311" key="DIALOG_WIDTH"/>
-		<item value="254" key="DIALOG_Y_ORIGIN"/>
-		<item value="782" key="DIALOG_X_ORIGIN"/>
-		<item value="452" key="DIALOG_HEIGHT"/>
+		<item value="331" key="DIALOG_WIDTH"/>
+		<item value="312" key="DIALOG_Y_ORIGIN"/>
+		<item value="472" key="DIALOG_HEIGHT"/>
+		<item value="1134" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="Recognizer." key="selection"/>
+		<item value="SetImage" key="selection"/>
 		<list key="findhistory">
+			<item value="setimage1"/>
+			<item value="setimage"/>
+			<item value="scale_factor"/>
+			<item value="HOGDescriptorSingle"/>
+			<item value="MakeNormalizedBlocks"/>
 			<item value="Recognizer."/>
 			<item value="Recognizer.o"/>
 			<item value="::mem"/>
