@@ -1,6 +1,17 @@
-22:21:29 **** Incremental Build of configuration Debug for project Example-BackgroundDifferenceWithHogFeature ****
+23:08:13 **** Incremental Build of configuration Debug for project Example-BackgroundDifferenceWithHogFeature ****
 make all 
-make: Nothing to be done for 'all'.
+Building file: ../main.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/home/yildbs/Workspace/Personal/Nsight-Workspace/libYCV" -G -g -O0 -Xcompiler -fPIC -std=c++11 -gencode arch=compute_60,code=sm_60  -odir "." -M -o "main.d" "../main.cpp"
+/usr/local/cuda-8.0/bin/nvcc -I"/home/yildbs/Workspace/Personal/Nsight-Workspace/libYCV" -G -g -O0 -Xcompiler -fPIC -std=c++11 --compile  -x c++ -o  "main.o" "../main.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../main.cpp
+ 
+Building target: Example-BackgroundDifferenceWithHogFeature
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static -L"/home/yildbs/Workspace/Personal/Nsight-Workspace/libYCV/Debug" -L/usr/local/lib -L/home/yildbs/Workspace/Personal/Nsight-Workspace/libYCV/Debug --relocatable-device-code=false -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60 -link -o  "Example-BackgroundDifferenceWithHogFeature"  ./main.o   -lYCV -lopencv_core -lopencv_imgproc -lopencv_imgcodecs -lopencv_highgui
+Finished building target: Example-BackgroundDifferenceWithHogFeature
+ 
 
-22:21:29 Build Finished (took 58ms)
+23:08:14 Build Finished (took 965ms)
 

@@ -1,0 +1,88 @@
+#include <opencv2/imgproc.hpp>
+#include <opencv2/core.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/objdetect.hpp>
+
+#include <ycv/core/core.hpp>
+#include <ycv/imgproc/hog/hog.h>
+
+int main()
+{
+	int image_width = 1280;
+	int image_height = 720;
+
+	cv::Mat image1 = cv::imread("/home/yildbs/Data/Test/bg1.jpg");
+	cv::Mat image2 = cv::imread("/home/yildbs/Data/Test/bg2.jpg");
+
+//	cv::resize(image, image, cv::Size(image_width, image_height));
+//	cv::imshow("image", image);
+//	cv::waitKey(0);
+
+//	cv::HOGDescriptor hog(
+//			cv::Size(image_width, image_height),
+//			cv::Size(16, 16),
+//			cv::Size(8, 8),
+//			8,
+//			9
+//	);
+
+	ycv::hog::HOGDescriptorSingle hog_descriptor;
+
+	int cell_size = 8;
+	hog_descriptor.Initialize(
+		image_width,
+		image_height,
+		3,
+		1.0,
+		true,
+		false,
+		9,
+		cell_size,
+		2,
+		static_cast<int>(image_width/cell_size),
+		static_cast<int>(image_height/cell_size)
+	);
+
+	std::vector<float> descriptor_image1;
+	std::vector<float> descriptor_image2;
+
+	{
+		ycv::YMat<unsigned char> yimage(image_width, image_height, 3, image1.data);
+		hog_descriptor.SetImage(yimage);
+		hog_descriptor.MakeHistogram();
+		hog_descriptor.MakeNormalizedBlocks();
+		hog_descriptor.MakeDescriptor(0, 0);
+		auto descriptor_size = hog_descriptor.GetDescriptorLength();
+		float* descriptor = hog_descriptor.GetDescriptor();
+
+		descriptor_image1.resize(descriptor_size);
+		::memcpy(descriptor_image1.data(), descriptor, sizeof(float)*descriptor_size);
+	}
+	{
+		ycv::YMat<unsigned char> yimage(image_width, image_height, 3, image2.data);
+		hog_descriptor.SetImage(yimage);
+		hog_descriptor.MakeHistogram();
+		hog_descriptor.MakeNormalizedBlocks();
+		hog_descriptor.MakeDescriptor(0, 0);
+		auto descriptor_size = hog_descriptor.GetDescriptorLength();
+		float* descriptor = hog_descriptor.GetDescriptor();
+
+		descriptor_image2.resize(descriptor_size);
+		::memcpy(descriptor_image2.data(), descriptor, sizeof(float)*descriptor_size);
+	}
+
+	auto des1 = descriptor_image1.data();
+	auto des2 = descriptor_image2.data();
+	for(int y=0;y<89;y++){
+		for(int x=0;x<159;x++){
+			unsigned int offset = (y * 159 + x)*36;
+			float sum = 0.;
+			for(int i=0;i<36;i++){
+				float diff = des1[i] - des2[i];
+				sum += diff*diff;
+			}
+			printf("x, y = %d, %d : %.5f\n", x, y, sum);
+		}
+	}
+
+}

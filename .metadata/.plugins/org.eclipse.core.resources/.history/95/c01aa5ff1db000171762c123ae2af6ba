@@ -1,0 +1,133 @@
+#include <opencv2/imgproc.hpp>
+#include <opencv2/core.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/objdetect.hpp>
+
+#include <ycv/core/core.hpp>
+#include <ycv/imgproc/hog/hog.h>
+
+int main()
+{
+	int image_width = 1280;
+	int image_height = 720;
+
+	cv::Mat image1 = cv::imread("/home/yildbs/Data/Test/bg5.jpg");
+	cv::Mat image2 = cv::imread("/home/yildbs/Data/Test/fg2.jpg");
+//	cv::Mat image2 = cv::imread("/home/yildbs/Data/sample.png");
+//	cv::resize(image2, image2, cv::Size(1280, 720));
+
+	cv::imshow("image1", image1);
+	cv::imshow("image2", image2);
+
+	cv::cvtColor(image1, image1, cv::COLOR_RGB2GRAY);
+	cv::equalizeHist(image1, image1);
+	cv::cvtColor(image1, image1, cv::COLOR_GRAY2RGB);
+
+	cv::cvtColor(image2, image2, cv::COLOR_RGB2GRAY);
+	cv::equalizeHist(image1, image1);
+	cv::cvtColor(image2, image2, cv::COLOR_GRAY2RGB);
+
+//	cv::resize(image, image, cv::Size(image_width, image_height));
+//	cv::imshow("image", image);
+//	cv::waitKey(0);
+
+//	cv::HOGDescriptor hog(
+//			cv::Size(image_width, image_height),
+//			cv::Size(16, 16),
+//			cv::Size(8, 8),
+//			8,
+//			9
+//	);
+
+	ycv::hog::HOGDescriptorSingle hog_descriptor;
+
+	int cell_size = 8;
+	int nbins = 9;
+	hog_descriptor.Initialize(
+		image_width,
+		image_height,
+		3,
+		1.0,
+		true,
+		false,
+		nbins,
+		cell_size,
+		2,
+		static_cast<int>(image_width/cell_size),
+		static_cast<int>(image_height/cell_size)
+	);
+
+	std::vector<float> descriptor_image1;
+	std::vector<float> descriptor_image2;
+
+	{
+		ycv::YMat<unsigned char> yimage(image_width, image_height, 3, image1.data);
+		hog_descriptor.SetImage(yimage);
+		hog_descriptor.MakeHistogram();
+		hog_descriptor.MakeNormalizedBlocks();
+		hog_descriptor.MakeDescriptor(0, 0);
+		auto descriptor_size = hog_descriptor.GetDescriptorLength();
+		float* descriptor = hog_descriptor.GetDescriptor();
+
+		descriptor_image1.resize(descriptor_size);
+		::memcpy(descriptor_image1.data(), descriptor, sizeof(float)*descriptor_size);
+	}
+	{
+		ycv::YMat<unsigned char> yimage(image_width, image_height, 3, image2.data);
+		hog_descriptor.SetImage(yimage);
+		hog_descriptor.MakeHistogram();
+		hog_descriptor.MakeNormalizedBlocks();
+		hog_descriptor.MakeDescriptor(0, 0);
+		auto descriptor_size = hog_descriptor.GetDescriptorLength();
+		float* descriptor = hog_descriptor.GetDescriptor();
+
+		descriptor_image2.resize(descriptor_size);
+		::memcpy(descriptor_image2.data(), descriptor, sizeof(float)*descriptor_size);
+	}
+
+	cv::Mat diff_image = cv::Mat(image_height, image_width, CV_8UC1);
+	for(int i=0;i<1280*720;i++){
+		diff_image.data[i] = 0;
+	}
+	auto des1 = descriptor_image1.data();
+	auto des2 = descriptor_image2.data();
+
+	int block_width = image_width / cell_size - 1;
+	int block_height = image_height / cell_size - 1;
+
+	for(int y=0;y<block_height;y++){
+		for(int x=0;x<block_width;x++){
+			unsigned int offset = (y * block_width + x)*nbins*4;
+			float sum = 0.;
+			for(int i=0;i<nbins*4;i++){
+				float diff = des1[offset+i] - des2[offset+i];
+				sum += diff*diff;
+			}
+			printf("x, y = %d, %d : %.5f\n", x, y, sum);
+
+			if(sum >= 1.2){
+				int x_start = x * cell_size;
+				int x_end = (x+2) * cell_size;
+				int y_start = y * cell_size;
+				int y_end = (y+2) * cell_size;
+
+
+				for(int temp_y=y_start;temp_y<y_end;temp_y++){
+					for(int temp_x=x_start;temp_x<x_end;temp_x++){
+						diff_image.data[temp_y*image_width + temp_x] += 100;
+					}
+				}
+			}
+		}
+	}
+
+//	for(int i=0;i<1280*720;i++){
+//		if(diff_image.data[i] < 150 ){
+//			diff_image.data[i] = 0;
+//		}
+//	}
+
+	cv::imshow("diff", diff_image);
+
+	cv::waitKey(0);
+}

@@ -3,6 +3,7 @@
 	<name>Example-BackgroundDifferenceWithHogFeature</name>
 	<comment></comment>
 	<projects>
+		<project>libYCV</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
