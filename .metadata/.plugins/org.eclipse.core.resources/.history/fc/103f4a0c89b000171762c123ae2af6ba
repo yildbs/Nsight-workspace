@@ -1,0 +1,46 @@
+/*
+ * BackgroundGenerator.cpp
+ *
+ *  Created on: Oct 14, 2017
+ *      Author: yildbs
+ */
+
+#include "BackgroundGenerator.h"
+
+namespace yot{
+
+BackgroundGenerator::BackgroundGenerator() {
+	// TODO Auto-generated constructor stub
+
+	this->params.absorb_ratio = 0.0001;
+	this->params.frame_width = 1280;
+	this->params.frame_height = 720;
+
+	this->background = cv::Mat(this->params.frame_height, this->params.frame_width, CV_8UC3);
+}
+
+BackgroundGenerator::~BackgroundGenerator() {
+	// TODO Auto-generated destructor stub
+}
+
+
+BackgroundGenerator& BackgroundGenerator::AbsorbFrame(cv::Mat& frame)
+{
+	float ratio = this->params.absorb_ratio;
+	this->background = (1.-ratio) * this->background + ratio * frame;
+
+	int width = this->params.frame_width;
+	int height this->params.frame_height;
+
+	for(int y=0;y<)
+
+	return *this;
+}
+
+BackgroundGenerator& BackgroundGenerator::ResetBackground(cv::Mat& frame)
+{
+	this->background = frame;
+	return *this;
+}
+
+}

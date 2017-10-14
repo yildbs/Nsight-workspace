@@ -1,0 +1,17 @@
+/*
+ * FrameSubstractor.h
+ *
+ *  Created on: Oct 14, 2017
+ *      Author: yildbs
+ */
+
+#ifndef FRAMESUBSTRACTOR_H_
+#define FRAMESUBSTRACTOR_H_
+
+class FrameSubstractor {
+public:
+	FrameSubstractor();
+	virtual ~FrameSubstractor();
+};
+
+#endif /* FRAMESUBSTRACTOR_H_ */

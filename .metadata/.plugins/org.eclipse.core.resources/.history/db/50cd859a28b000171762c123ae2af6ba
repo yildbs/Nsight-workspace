@@ -1,0 +1,17 @@
+/*
+ * ObjectTracker.h
+ *
+ *  Created on: Oct 14, 2017
+ *      Author: yildbs
+ */
+
+#ifndef OBJECTTRACKER_H_
+#define OBJECTTRACKER_H_
+
+class ObjectTracker {
+public:
+	ObjectTracker();
+	virtual ~ObjectTracker();
+};
+
+#endif /* OBJECTTRACKER_H_ */

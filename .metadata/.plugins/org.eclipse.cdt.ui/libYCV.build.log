@@ -1,6 +1,6 @@
-23:08:12 **** Incremental Build of configuration Debug for project libYCV ****
+12:11:48 **** Incremental Build of configuration Debug for project libYCV ****
 make all 
 make: Nothing to be done for 'all'.
 
-23:08:13 Build Finished (took 65ms)
+12:11:48 Build Finished (took 63ms)
 

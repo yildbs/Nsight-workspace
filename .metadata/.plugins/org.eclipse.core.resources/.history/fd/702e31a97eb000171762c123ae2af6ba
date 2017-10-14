@@ -1,0 +1,43 @@
+/*
+ * FrameSubstractor.cpp
+ *
+ *  Created on: Oct 14, 2017
+ *      Author: yildbs
+ */
+
+#include "FrameSubstractor.h"
+
+namespace yot{
+
+FrameSubstractor::FrameSubstractor() {
+	// TODO Auto-generated constructor stub
+	this->params.frame_width = 1280;
+	this->params.frame_height = 720;
+
+	this->params.cell_size = 8;
+	this->params.nbins = 9;
+
+
+	int cell_size = this->params.cell_size;
+	int nbins = this->params.nbins;
+	hog_descriptor.Initialize(
+			this->params.frame_width,
+		image_height,
+		3,
+		1.0,
+		true,
+		false,
+		nbins,
+		cell_size,
+		2,
+		static_cast<int>(image_width/cell_size),
+		static_cast<int>(image_height/cell_size)
+	);
+
+}
+
+FrameSubstractor::~FrameSubstractor() {
+	// TODO Auto-generated destructor stub
+}
+
+}

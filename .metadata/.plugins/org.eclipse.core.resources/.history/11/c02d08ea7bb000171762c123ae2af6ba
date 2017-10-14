@@ -1,0 +1,17 @@
+/*
+ * BackgroundGenerator.h
+ *
+ *  Created on: Oct 14, 2017
+ *      Author: yildbs
+ */
+
+#ifndef BACKGROUNDGENERATOR_H_
+#define BACKGROUNDGENERATOR_H_
+
+class BackgroundGenerator {
+public:
+	BackgroundGenerator();
+	virtual ~BackgroundGenerator();
+};
+
+#endif /* BACKGROUNDGENERATOR_H_ */

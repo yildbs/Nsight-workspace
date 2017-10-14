@@ -1,0 +1,111 @@
+/*
+ * FrameSubstractor.cpp
+ *
+ *  Created on: Oct 14, 2017
+ *      Author: yildbs
+ */
+
+#include "FrameSubstractor.h"
+
+namespace yot{
+
+FrameSubstractor::FrameSubstractor() {
+	// TODO Auto-generated constructor stub
+	this->params.frame_width = 1280;
+	this->params.frame_height = 720;
+
+	this->params.cell_size = 8;
+	this->params.nbins = 9;
+
+	int cell_size = this->params.cell_size;
+	int nbins = this->params.nbins;
+	hog_descriptor.Initialize(
+		this->params.frame_width,
+		this->params.frame_height,
+		3,
+		1.0,
+		true,
+		false,
+		nbins,
+		cell_size,
+		2,
+		static_cast<int>(image_width/cell_size),
+		static_cast<int>(image_height/cell_size)
+	);
+
+}
+
+FrameSubstractor::~FrameSubstractor() {
+	// TODO Auto-generated destructor stub
+}
+
+FrameSubstractor& FrameSubstractor::Substract(cv::Mat background,cv::Mat frame)
+{
+	std::vector<float> descriptor_image1;
+	std::vector<float> descriptor_image2;
+	{
+		ycv::YMat<unsigned char> yimage(image_width, image_height, 3, image1.data);
+		hog_descriptor.SetImage(yimage);
+		hog_descriptor.MakeHistogram();
+		hog_descriptor.MakeNormalizedBlocks();
+		hog_descriptor.MakeDescriptor(0, 0);
+		auto descriptor_size = hog_descriptor.GetDescriptorLength();
+		float* descriptor = hog_descriptor.GetDescriptor();
+
+		descriptor_image1.resize(descriptor_size);
+		::memcpy(descriptor_image1.data(), descriptor, sizeof(float)*descriptor_size);
+	}
+	{
+		ycv::YMat<unsigned char> yimage(image_width, image_height, 3, image2.data);
+		hog_descriptor.SetImage(yimage);
+		hog_descriptor.MakeHistogram();
+		hog_descriptor.MakeNormalizedBlocks();
+		hog_descriptor.MakeDescriptor(0, 0);
+		auto descriptor_size = hog_descriptor.GetDescriptorLength();
+		float* descriptor = hog_descriptor.GetDescriptor();
+
+		descriptor_image2.resize(descriptor_size);
+		::memcpy(descriptor_image2.data(), descriptor, sizeof(float)*descriptor_size);
+	}
+
+	cv::Mat diff_image = cv::Mat(image_height, image_width, CV_8UC1);
+	for(int i=0;i<1280*720;i++){
+		diff_image.data[i] = 0;
+	}
+	auto des1 = descriptor_image1.data();
+	auto des2 = descriptor_image2.data();
+
+	int block_width = image_width / cell_size - 1;
+	int block_height = image_height / cell_size - 1;
+
+	for(int y=0;y<block_height;y++){
+		for(int x=0;x<block_width;x++){
+			unsigned int offset = (y * block_width + x)*nbins*4;
+			float sum = 0.;
+			for(int i=0;i<nbins*4;i++){
+				float diff = des1[offset+i] - des2[offset+i];
+				sum += diff*diff;
+			}
+			printf("x, y = %d, %d : %.5f\n", x, y, sum);
+
+			if(sum >= 1.5){
+				int x_start = x * cell_size;
+				int x_end = (x+2) * cell_size;
+				int y_start = y * cell_size;
+				int y_end = (y+2) * cell_size;
+
+				for(int temp_y=y_start;temp_y<y_end;temp_y++){
+					for(int temp_x=x_start;temp_x<x_end;temp_x++){
+						diff_image.data[temp_y*image_width + temp_x] += 100;
+					}
+				}
+			}
+		}
+	}
+
+
+	return *this;
+}
+
+
+}

@@ -1,0 +1,18 @@
+/*
+ * FrameSubstractor.h
+ *
+ *  Created on: Oct 14, 2017
+ *      Author: yildbs
+ */
+
+#pragma once
+
+namespace yot{
+
+class FrameSubstractor {
+public:
+	FrameSubstractor();
+	virtual ~FrameSubstractor();
+};
+
+}

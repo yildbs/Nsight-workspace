@@ -1,0 +1,18 @@
+/*
+ * FrameSubstractor.cpp
+ *
+ *  Created on: Oct 14, 2017
+ *      Author: yildbs
+ */
+
+#include "FrameSubstractor.h"
+
+FrameSubstractor::FrameSubstractor() {
+	// TODO Auto-generated constructor stub
+
+}
+
+FrameSubstractor::~FrameSubstractor() {
+	// TODO Auto-generated destructor stub
+}
+

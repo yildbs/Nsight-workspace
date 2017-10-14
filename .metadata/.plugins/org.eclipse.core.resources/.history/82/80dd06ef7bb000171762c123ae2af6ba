@@ -1,0 +1,18 @@
+/*
+ * BackgroundGenerator.cpp
+ *
+ *  Created on: Oct 14, 2017
+ *      Author: yildbs
+ */
+
+#include "BackgroundGenerator.h"
+
+BackgroundGenerator::BackgroundGenerator() {
+	// TODO Auto-generated constructor stub
+
+}
+
+BackgroundGenerator::~BackgroundGenerator() {
+	// TODO Auto-generated destructor stub
+}
+

@@ -1,0 +1,17 @@
+/*
+ * ObjectFinder.h
+ *
+ *  Created on: Oct 14, 2017
+ *      Author: yildbs
+ */
+
+#ifndef OBJECTFINDER_H_
+#define OBJECTFINDER_H_
+
+class ObjectFinder {
+public:
+	ObjectFinder();
+	virtual ~ObjectFinder();
+};
+
+#endif /* OBJECTFINDER_H_ */
